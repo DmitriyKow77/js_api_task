@@ -1,0 +1,33 @@
+{
+  "name": "api_automation_rest_test_task",
+  "version": "1.0.0",
+  "description": "API Test Automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha specs/*.js --reporter mochawesome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asimkazmi/JavaScript_API_Test.git"
+  },
+  "keywords": [
+    "MOCHA",
+    "Chai",
+    "API",
+    "Automation",
+    "POC",
+    "JavaScript",
+    "Node.JS"
+  ],
+  "author": "dmytro.kovalenkodk@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "chai-http": "^4.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.0.3"
+  }
+}

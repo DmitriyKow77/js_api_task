@@ -1,0 +1,7 @@
+{
+  "BaseURL" : "https://l761dniu80.execute-api.us-east-2.amazonaws.com/default/",
+  
+  "endPoints":{
+    "exerciseAPI": "exercise_api"
+  }
+}

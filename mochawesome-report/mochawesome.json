@@ -1,0 +1,101 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2022-03-30T09:53:48.601Z",
+    "end": "2022-03-30T09:53:49.406Z",
+    "duration": 805,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "danger",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "3b5e73a0-3ede-403a-b87a-4a8cd3367542",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "bbe94829-b071-47df-aaef-71675d6bde6a",
+        "title": "Get Reports",
+        "fullFile": "/Users/dimakov/Documents/projects/js-api-task/specs/getreports.js",
+        "file": "/specs/getreports.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "1fa08a7b-0d42-4a00-b614-573e3e95962c",
+            "title": "Basic Shakedown Test",
+            "fullFile": "/Users/dimakov/Documents/projects/js-api-task/specs/getreports.js",
+            "file": "/specs/getreports.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Verify API is responsive",
+                "fullTitle": "Get Reports Basic Shakedown Test Verify API is responsive",
+                "timedOut": false,
+                "duration": 798,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData = envData.BaseURL + envData.endPoints.exerciseAPI;\n            currentResponse = await Get_data(testData);\n            expect(currentResponse.status).to.equal(200, currentResponse.body);\n            \n            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\n     \n            expect(currentResponseBody).to.be.an('object');",
+                "err": {
+                  "message": "AssertionError: expected 400 to equal 200",
+                  "estack": "AssertionError: expected 400 to equal 200\n    at Context.<anonymous> (specs/getreports.js:20:47)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 200\n"
+                },
+                "isRoot": false,
+                "uuid": "27b3826f-cd0c-44b6-967d-1d785547f678",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [
+              "27b3826f-cd0c-44b6-967d-1d785547f678"
+            ],
+            "pending": [],
+            "skipped": [],
+            "duration": 798,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 30000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 30000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 2000
+  },
+  "copyrightYear": 2022
+}
