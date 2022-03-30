@@ -1,8 +1,7 @@
 
 const expect = require("chai").expect;
 const envData = require('../resource/datafile/endPoints.json');
-const testingData = require('../resource/datafile/testData.json');
-const {Get_data, Delete_data, POST_data, Send_request} = require("../apiModules/analiseApp/Get_data");
+const {Send_request} = require("../apiModules/analiseApp/Get_data");
 
 
 describe('Get Reports', function() {
@@ -12,9 +11,9 @@ let testData = {
     apiUrl: envData.BaseURL + envData.endPoints.exerciseAPI
 }
 
-    describe('Basic Shakedown Test', function() {
+    describe('Basic Sanity Test', function() {
 
-        it('Verify API is responsive', async function() {
+        it('Verify GET method of test endpoint', async function() {
             currentResponse = await Send_request(testData);
 
             expect(currentResponse.status).to.equal(200, `Body error is: "${currentResponse.data}"`);
@@ -38,14 +37,73 @@ let testData = {
            expect(currentResponseBody.value).to.equal(testData.body.value);
        });
 
+       it('PUT request negative test for missing key' , async function() {
+           testData.method = "put";
+           testData.body = {"value": 7};
+
+           currentResponse = await Send_request(testData);
+           currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
+
+           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+       });
+
+       it('PUT request negative test for missing value' , async function() {
+           testData.method = "put";
+           testData.body = {"main_key": "Dmitriy"};
+
+           currentResponse = await Send_request(testData);
+           currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
+
+           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+       });
+
+
+       it('PUT request negative test for empty body' , async function() {
+           testData.method = "put";
+           testData.body = {};
+
+           currentResponse = await Send_request(testData);
+           currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
+
+           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+       });
+
        it('Verify POST method of test endpoint' , async function() {
+           testData.method = "post";
            testData.body = {"main_key": "Dmitriy", "value": 33};
-           currentResponse = await POST_data(testData);
+           currentResponse = await Send_request(testData);
            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
 
            expect(currentResponse.status).to.equal(200, `Body error is: "${currentResponseBody}"`);
            expect(currentResponseBody.main_key).to.equal(testData.body.main_key);
            expect(currentResponseBody.value).to.equal(testData.body.value);
+       });
+
+       it('POST request negative test for missing key' , async function() {
+           testData.method = "post";
+           testData.body = {"main_key": "", "value": 33};
+           currentResponse = await Send_request(testData);
+           currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
+
+           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+       });
+
+       it('POST request negative test for missing value' , async function() {
+           testData.method = "post";
+           testData.body = {"main_key": "Dmitriy"};
+           currentResponse = await Send_request(testData);
+           currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
+
+           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+       });
+
+       it('POST request negative test for empty value' , async function() {
+           testData.method = "post";
+           testData.body = {};
+           currentResponse = await Send_request(testData);
+           currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
+
+           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
        });
 
        it('Verify DELETE method of test endpoint with existing data' , async function() {

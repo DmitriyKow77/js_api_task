@@ -1,15 +1,15 @@
 {
   "stats": {
-    "suites": 2,
-    "tests": 1,
-    "passes": 0,
+    "suites": 3,
+    "tests": 12,
+    "passes": 1,
     "pending": 0,
-    "failures": 1,
-    "start": "2022-03-30T09:53:48.601Z",
-    "end": "2022-03-30T09:53:49.406Z",
-    "duration": 805,
-    "testsRegistered": 1,
-    "passPercent": 0,
+    "failures": 11,
+    "start": "2022-03-30T12:55:24.867Z",
+    "end": "2022-03-30T12:55:31.219Z",
+    "duration": 6352,
+    "testsRegistered": 12,
+    "passPercent": 8.3,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -19,7 +19,7 @@
     "pendingPercentClass": "danger"
   },
   "suites": {
-    "uuid": "3b5e73a0-3ede-403a-b87a-4a8cd3367542",
+    "uuid": "460d7739-e410-4227-91ac-b2ba30d5ad02",
     "title": "",
     "fullFile": "",
     "file": "",
@@ -28,39 +28,39 @@
     "tests": [],
     "suites": [
       {
-        "uuid": "bbe94829-b071-47df-aaef-71675d6bde6a",
+        "uuid": "6a687889-e44d-4510-970a-4d680b793f56",
         "title": "Get Reports",
-        "fullFile": "/Users/dimakov/Documents/projects/js-api-task/specs/getreports.js",
-        "file": "/specs/getreports.js",
+        "fullFile": "/Users/dimakov/Documents/projects/js-api-task/js_api_task/specs/autoExersiseTest.js",
+        "file": "/specs/autoExersiseTest.js",
         "beforeHooks": [],
         "afterHooks": [],
         "tests": [],
         "suites": [
           {
-            "uuid": "1fa08a7b-0d42-4a00-b614-573e3e95962c",
-            "title": "Basic Shakedown Test",
-            "fullFile": "/Users/dimakov/Documents/projects/js-api-task/specs/getreports.js",
-            "file": "/specs/getreports.js",
+            "uuid": "96dfd216-a720-4a71-a838-ca803424905e",
+            "title": "Basic Sanity Test",
+            "fullFile": "/Users/dimakov/Documents/projects/js-api-task/js_api_task/specs/autoExersiseTest.js",
+            "file": "/specs/autoExersiseTest.js",
             "beforeHooks": [],
             "afterHooks": [],
             "tests": [
               {
-                "title": "Verify API is responsive",
-                "fullTitle": "Get Reports Basic Shakedown Test Verify API is responsive",
+                "title": "Verify GET method of test endpoint",
+                "fullTitle": "Get Reports Basic Sanity Test Verify GET method of test endpoint",
                 "timedOut": false,
-                "duration": 798,
+                "duration": 818,
                 "state": "failed",
                 "pass": false,
                 "fail": true,
                 "pending": false,
-                "code": "testData = envData.BaseURL + envData.endPoints.exerciseAPI;\n            currentResponse = await Get_data(testData);\n            expect(currentResponse.status).to.equal(200, currentResponse.body);\n            \n            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\n     \n            expect(currentResponseBody).to.be.an('object');",
+                "code": "currentResponse = await Send_request(testData);\nexpect(currentResponse.status).to.equal(200, `Body error is: \"${currentResponse.data}\"`);\n\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponseBody).to.be.an('object');\nexpect(currentResponseBody).to.have.length.above(0);",
                 "err": {
-                  "message": "AssertionError: expected 400 to equal 200",
-                  "estack": "AssertionError: expected 400 to equal 200\n    at Context.<anonymous> (specs/getreports.js:20:47)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "message": "AssertionError: Body error is: \"Object of type Decimal is not JSON serializable\": expected 400 to equal 200",
+                  "estack": "AssertionError: Body error is: \"Object of type Decimal is not JSON serializable\": expected 400 to equal 200\n    at Context.<anonymous> (specs/autoExersiseTest.js:19:47)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                   "diff": "- 400\n+ 200\n"
                 },
                 "isRoot": false,
-                "uuid": "27b3826f-cd0c-44b6-967d-1d785547f678",
+                "uuid": "b5d99cb4-db40-4c88-941e-b976346dfe90",
                 "isHook": false,
                 "skipped": false
               }
@@ -68,11 +68,260 @@
             "suites": [],
             "passes": [],
             "failures": [
-              "27b3826f-cd0c-44b6-967d-1d785547f678"
+              "b5d99cb4-db40-4c88-941e-b976346dfe90"
             ],
             "pending": [],
             "skipped": [],
-            "duration": 798,
+            "duration": 818,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 30000
+          },
+          {
+            "uuid": "b129612f-14c0-4bb5-a3c4-29e0e18511a1",
+            "title": "Functional Tests",
+            "fullFile": "/Users/dimakov/Documents/projects/js-api-task/js_api_task/specs/autoExersiseTest.js",
+            "file": "/specs/autoExersiseTest.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Verify PUT method of test endpoint",
+                "fullTitle": "Get Reports Functional Tests Verify PUT method of test endpoint",
+                "timedOut": false,
+                "duration": 535,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"put\";\ntestData.body = {\"main_key\": \"Dmitriy\", \"value\": 7};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(200, `Body error is: \"${currentResponseBody}\"`);\nexpect(currentResponseBody.main_key).to.equal(testData.body.main_key);\nexpect(currentResponseBody.value).to.equal(testData.body.value);",
+                "err": {
+                  "message": "AssertionError: Body error is: \"you reached your quta\": expected 400 to equal 200",
+                  "estack": "AssertionError: Body error is: \"you reached your quta\": expected 400 to equal 200\n    at Context.<anonymous> (specs/autoExersiseTest.js:35:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 200\n"
+                },
+                "isRoot": false,
+                "uuid": "59b44272-3f52-483e-ade4-e90850cf8a1c",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "PUT request negative test for missing key",
+                "fullTitle": "Get Reports Functional Tests PUT request negative test for missing key",
+                "timedOut": false,
+                "duration": 481,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"put\";\ntestData.body = {\"value\": 7};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(500, `Body error is: \"${currentResponseBody}\"`);",
+                "err": {
+                  "message": "AssertionError: Body error is: \"'main_key'\": expected 400 to equal 500",
+                  "estack": "AssertionError: Body error is: \"'main_key'\": expected 400 to equal 500\n    at Context.<anonymous> (specs/autoExersiseTest.js:47:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 500\n"
+                },
+                "isRoot": false,
+                "uuid": "48ecbcad-ccac-4c04-94d8-e4b618030866",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "PUT request negative test for missing value",
+                "fullTitle": "Get Reports Functional Tests PUT request negative test for missing value",
+                "timedOut": false,
+                "duration": 488,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"put\";\ntestData.body = {\"main_key\": \"Dmitriy\"};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(500, `Body error is: \"${currentResponseBody}\"`);",
+                "err": {
+                  "message": "AssertionError: Body error is: \"'value'\": expected 400 to equal 500",
+                  "estack": "AssertionError: Body error is: \"'value'\": expected 400 to equal 500\n    at Context.<anonymous> (specs/autoExersiseTest.js:57:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 500\n"
+                },
+                "isRoot": false,
+                "uuid": "0a3d51c1-9420-4a3d-bee9-9fd7c5b07e87",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "PUT request negative test for empty body",
+                "fullTitle": "Get Reports Functional Tests PUT request negative test for empty body",
+                "timedOut": false,
+                "duration": 471,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"put\";\ntestData.body = {};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(500, `Body error is: \"${currentResponseBody}\"`);",
+                "err": {
+                  "message": "AssertionError: Body error is: \"'main_key'\": expected 400 to equal 500",
+                  "estack": "AssertionError: Body error is: \"'main_key'\": expected 400 to equal 500\n    at Context.<anonymous> (specs/autoExersiseTest.js:68:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 500\n"
+                },
+                "isRoot": false,
+                "uuid": "708be55c-447c-4681-8661-270373fea703",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "Verify POST method of test endpoint",
+                "fullTitle": "Get Reports Functional Tests Verify POST method of test endpoint",
+                "timedOut": false,
+                "duration": 554,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"post\";\ntestData.body = {\"main_key\": \"Dmitriy\", \"value\": 33};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(200, `Body error is: \"${currentResponseBody}\"`);\nexpect(currentResponseBody.main_key).to.equal(testData.body.main_key);\nexpect(currentResponseBody.value).to.equal(testData.body.value);",
+                "err": {
+                  "message": "AssertionError: Body error is: \"value dose not exist\": expected 400 to equal 200",
+                  "estack": "AssertionError: Body error is: \"value dose not exist\": expected 400 to equal 200\n    at Context.<anonymous> (specs/autoExersiseTest.js:77:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 200\n"
+                },
+                "isRoot": false,
+                "uuid": "b9b6653b-3e00-4540-a21e-e53ffd076969",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "POST request negative test for missing key",
+                "fullTitle": "Get Reports Functional Tests POST request negative test for missing key",
+                "timedOut": false,
+                "duration": 531,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"post\";\ntestData.body = {\"main_key\": \"\", \"value\": 33};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(500, `Body error is: \"${currentResponseBody}\"`);",
+                "err": {
+                  "message": "AssertionError: Body error is: \"'list' object has no attribute 'get'\": expected 400 to equal 500",
+                  "estack": "AssertionError: Body error is: \"'list' object has no attribute 'get'\": expected 400 to equal 500\n    at Context.<anonymous> (specs/autoExersiseTest.js:88:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 500\n"
+                },
+                "isRoot": false,
+                "uuid": "2d2128c4-16a9-4578-906c-863b3c064245",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "POST request negative test for missing value",
+                "fullTitle": "Get Reports Functional Tests POST request negative test for missing value",
+                "timedOut": false,
+                "duration": 470,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"post\";\ntestData.body = {\"main_key\": \"Dmitriy\"};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(500, `Body error is: \"${currentResponseBody}\"`);",
+                "err": {
+                  "message": "AssertionError: Body error is: \"'value'\": expected 400 to equal 500",
+                  "estack": "AssertionError: Body error is: \"'value'\": expected 400 to equal 500\n    at Context.<anonymous> (specs/autoExersiseTest.js:97:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 500\n"
+                },
+                "isRoot": false,
+                "uuid": "4fd4a078-3aef-4c62-9233-f6a8e1797228",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "POST request negative test for empty value",
+                "fullTitle": "Get Reports Functional Tests POST request negative test for empty value",
+                "timedOut": false,
+                "duration": 468,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"post\";\ntestData.body = {};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(500, `Body error is: \"${currentResponseBody}\"`);",
+                "err": {
+                  "message": "AssertionError: Body error is: \"'main_key'\": expected 400 to equal 500",
+                  "estack": "AssertionError: Body error is: \"'main_key'\": expected 400 to equal 500\n    at Context.<anonymous> (specs/autoExersiseTest.js:106:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 400\n+ 500\n"
+                },
+                "isRoot": false,
+                "uuid": "f3b3bdf4-98c0-4a28-9045-94d6cc14eed8",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "Verify DELETE method of test endpoint with existing data",
+                "fullTitle": "Get Reports Functional Tests Verify DELETE method of test endpoint with existing data",
+                "timedOut": false,
+                "duration": 540,
+                "state": "passed",
+                "speed": "slow",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "testData.method = \"delete\";\ntestData.body = {\"main_key\": \"Dmitriy\"};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(200, `Body error is: \"${currentResponseBody}\"`);\nexpect(currentResponseBody.main_key).to.equal(testData.body.main_key);\nexpect(currentResponseBody.value).to.equal(testData.body.value);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "bec960c1-41e7-4b90-af7e-0d0df1a9cbb1",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "Verify DELETE method of test endpoint with NOT valid data",
+                "fullTitle": "Get Reports Functional Tests Verify DELETE method of test endpoint with NOT valid data",
+                "timedOut": false,
+                "duration": 522,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.method = \"delete\";\ntestData.body = {\"main_key\": \"Not_existing\"};\ncurrentResponse = await Send_request(testData);\ncurrentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));\nexpect(currentResponse.status).to.equal(400, `Body is: \"${JSON.stringify(currentResponseBody)}\", but expected to get error code`);",
+                "err": {
+                  "message": "AssertionError: Body is: \"{\"main_key\":\"Not_existing\"}\", but expected to get error code: expected 200 to equal 400",
+                  "estack": "AssertionError: Body is: \"{\"main_key\":\"Not_existing\"}\", but expected to get error code: expected 200 to equal 400\n    at Context.<anonymous> (specs/autoExersiseTest.js:126:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 200\n+ 400\n"
+                },
+                "isRoot": false,
+                "uuid": "f49caef8-bf01-4eca-97e3-b373ce77b40f",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "Verify calling Non Existent endpoint",
+                "fullTitle": "Get Reports Functional Tests Verify calling Non Existent endpoint",
+                "timedOut": false,
+                "duration": 455,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "testData.apiUrl = testData.apiUrl + \"_non_existing\";\ncurrentResponse = await Send_request(testData);\nexpect(currentResponse.status).to.equal(404, `Expected to get 404 error for not eixisting url ${testData.apiUrl}`);",
+                "err": {
+                  "message": "AssertionError: Expected to get 404 error for not eixisting url https://l761dniu80.execute-api.us-east-2.amazonaws.com/default/exercise_api_non_existing: expected 403 to equal 404",
+                  "estack": "AssertionError: Expected to get 404 error for not eixisting url https://l761dniu80.execute-api.us-east-2.amazonaws.com/default/exercise_api_non_existing: expected 403 to equal 404\n    at Context.<anonymous> (specs/autoExersiseTest.js:133:46)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
+                  "diff": "- 403\n+ 404\n"
+                },
+                "isRoot": false,
+                "uuid": "62e3ecf4-447b-4f16-933c-5dc9bc9ae392",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "bec960c1-41e7-4b90-af7e-0d0df1a9cbb1"
+            ],
+            "failures": [
+              "59b44272-3f52-483e-ade4-e90850cf8a1c",
+              "48ecbcad-ccac-4c04-94d8-e4b618030866",
+              "0a3d51c1-9420-4a3d-bee9-9fd7c5b07e87",
+              "708be55c-447c-4681-8661-270373fea703",
+              "b9b6653b-3e00-4540-a21e-e53ffd076969",
+              "2d2128c4-16a9-4578-906c-863b3c064245",
+              "4fd4a078-3aef-4c62-9233-f6a8e1797228",
+              "f3b3bdf4-98c0-4a28-9045-94d6cc14eed8",
+              "f49caef8-bf01-4eca-97e3-b373ce77b40f",
+              "62e3ecf4-447b-4f16-933c-5dc9bc9ae392"
+            ],
+            "pending": [],
+            "skipped": [],
+            "duration": 5515,
             "root": false,
             "rootEmpty": false,
             "_timeout": 30000
