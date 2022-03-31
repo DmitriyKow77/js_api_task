@@ -19,8 +19,12 @@ let testData = {
             expect(currentResponse.status).to.equal(200, `Body error is: "${currentResponse.data}"`);
             
             currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
-            expect(currentResponseBody).to.be.an('object');
             expect(currentResponseBody).to.have.length.above(0);
+
+            let fistResult = currentResponseBody[0];
+            expect(fistResult).to.be.an('object');
+            expect(fistResult).to.have.property("main_key").to.be.a('string');
+            expect(fistResult).to.have.property("value").to.be.a('string');
         });
     });
 
@@ -44,7 +48,7 @@ let testData = {
            currentResponse = await Send_request(testData);
            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
 
-           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+           expect(currentResponse.status).to.equal(400, `Body error is: "${currentResponseBody}"`);
        });
 
        it('PUT request negative test for missing value' , async function() {
@@ -54,7 +58,7 @@ let testData = {
            currentResponse = await Send_request(testData);
            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
 
-           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+           expect(currentResponse.status).to.equal(400, `Body error is: "${currentResponseBody}"`);
        });
 
 
@@ -65,7 +69,7 @@ let testData = {
            currentResponse = await Send_request(testData);
            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
 
-           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+           expect(currentResponse.status).to.equal(400, `Body error is: "${currentResponseBody}"`);
        });
 
        it('Verify POST method of test endpoint' , async function() {
@@ -85,7 +89,7 @@ let testData = {
            currentResponse = await Send_request(testData);
            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
 
-           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+           expect(currentResponse.status).to.equal(400, `Body error is: "${currentResponseBody}"`);
        });
 
        it('POST request negative test for missing value' , async function() {
@@ -94,7 +98,7 @@ let testData = {
            currentResponse = await Send_request(testData);
            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
 
-           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+           expect(currentResponse.status).to.equal(400, `Body error is: "${currentResponseBody}"`);
        });
 
        it('POST request negative test for empty value' , async function() {
@@ -103,7 +107,7 @@ let testData = {
            currentResponse = await Send_request(testData);
            currentResponseBody = JSON.parse(JSON.stringify(currentResponse.data));
 
-           expect(currentResponse.status).to.equal(500, `Body error is: "${currentResponseBody}"`);
+           expect(currentResponse.status).to.equal(400, `Body error is: "${currentResponseBody}"`);
        });
 
        it('Verify DELETE method of test endpoint with existing data' , async function() {

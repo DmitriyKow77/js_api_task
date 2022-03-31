@@ -13,6 +13,7 @@ const Send_request = testData =>
         Request(options)
         .then(function (response) {
             resolve(response);
+            console.log(`Sent ${testData.method} request to ${testData.apiUrl}`)
         })
         .catch(function (err) {
             reject(err);
