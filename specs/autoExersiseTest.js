@@ -24,7 +24,7 @@ let testData = {
             let fistResult = currentResponseBody[0];
             expect(fistResult).to.be.an('object');
             expect(fistResult).to.have.property("main_key").to.be.a('string');
-            expect(fistResult).to.have.property("value").to.be.a('string');
+            expect(fistResult).to.have.property("value").to.be.a('string').to.match(/\d+/);
         });
     });
 
